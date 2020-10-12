@@ -1,0 +1,12 @@
+<div class="slides-explorer" >
+    <ng-container *ngFor="let slide of getSlidesList(selectedNode)">
+        <div class="slides-explorer__item" *ngIf="!slide.children"  [routerLink]=getRoute(slide.state)>
+            <!-- <div class="minor text--xxs" *ngIf="!slideLabelsHidden">
+                {{slide.state}}
+            </div> -->
+            <div class=" bg--content overflow--auto flex stretch">
+                <img class="width--100" src="slides-cache/{{slide.component}}.png" alt="">
+            </div>
+        </div>
+    </ng-container>
+</div>

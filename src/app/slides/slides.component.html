@@ -1,0 +1,169 @@
+<div class="major absolute-stretch bg--canvas">
+    <div class="flex flex--0 flex-direction--column border--r bg--aside"
+        [ngClass]="{
+                        'width--0 opacity--0 ': sidebarClosed || isFullscreen,
+                        'width--xl opacity--1 ': !sidebarClosed && !isFullscreen
+                    }">
+        <div class="tool-bar border--b">
+            <div class="input-block input-block--integrated-controls flex--1">
+                <input class="input-block__input" id="filter" #filter (keyup)="filterFn(filter.value, slidesTree.treeModel)" placeholder="Find slide" [(ngModel)]="treeFilterValue" />
+                <div class="input-block__controls bg--aside">
+                    <button class="btn btn--icon btn--integrated" title="Clear filter" *ngIf="treeFilterValue"
+                        (click)="clearFilter()">
+                        <div class="icon-clear"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="margin--l--auto minor padding-l--xs">
+                <button class="btn btn--icon btn--silent" title="Collapse all"
+                    (click)="slidesTree.treeModel.collapseAll()">
+                    <div class="icon-collapse-all"></div>
+                </button>
+            </div>
+        </div>
+        <tree-root id="slidesTree" class="rows" [focused]="true" [nodes]="nodes" [options]="treeOptions" #slidesTree [(state)]="state" (event)="onEvent($event)">
+            <ng-template #treeNodeFullTemplate
+                let-node
+                let-index="index"
+                let-templates="templates">
+                <div
+                    id="{{node.data.id}}"
+                    [class]="node.getClass()"
+                    [class.tree-node]="true"
+                    [class.tree-node-expanded]="node.isExpanded && node.hasChildren"
+                    [class.tree-node-collapsed]="node.isCollapsed && node.hasChildren"
+                    [class.tree-node-leaf]="node.isLeaf"
+                    [class.tree-node-focused]="node.isFocused">
+                    <tree-node-drop-slot
+                        *ngIf="index === 0"
+                        [dropIndex]="node.index"
+                        [node]="node.parent">
+                    </tree-node-drop-slot>
+                    <div
+                        *ngIf="!templates.treeNodeWrapperTemplate"
+                        class="flex align-items--center margin-r--xs on-hover--bg-hover on-hover-show"
+                        [style.padding-left]="node.getNodePadding()"
+                        [class.bg--selected]="node.isActive&&node.data.children"
+                        [ngClass]="{'outline outline-color-secondary outline--bolder':node.isFocused}">
+                        <tree-node-checkbox *ngIf="node.options.useCheckbox" [node]="node"></tree-node-checkbox>
+                        <div class="btn btn--integrated btn--icon" *ngIf="node.hasChildren" (click)="node.mouseAction('expanderClick', $event); $event.stopPropagation()">
+                            <div [class.icon-down]="node.isExpanded"
+                                [class.icon-right]="node.isCollapsed"
+                                class="icon-size--8"></div>
+                        </div>
+                        <div class="rows"
+                            [routerLink]=[node.data.state]
+                            (click)="node.mouseAction('click', $event)"
+                            (dblclick)="node.mouseAction('dblClick', $event)"
+                            (contextmenu)="node.mouseAction('contextMenu', $event)"
+                            (treeDrop)="node.onDrop($event)"
+                            (treeDropDragOver)="node.mouseAction('dragOver', $event)"
+                            (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
+                            (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
+                            [treeAllowDrop]="node.allowDrop"
+                            [allowDragoverStyling]="node.allowDragoverStyling()"
+                            [treeDrag]="node"
+                            [treeDragEnabled]="node.allowDrag() && !node.nodeIsInEditingMode">
+                            <div class="flex--1 flex align-items--center" *ngIf="node.children">
+                                <div class="flex--1 ellipsis" *ngIf="!node.nodeIsInEditingMode">
+                                    {{ node.data.name }}
+                                </div>
+                                <input class="flex--1 ellipsis" type="text"
+                                    (clickOutside)="toggleNodeEditingMode(false, node)"
+                                    *ngIf="node.nodeIsInEditingMode"
+                                    [(ngModel)]="node.data.name"
+                                    (keyup.enter)="rename(node)"
+                                    [value]="node.data.name">
+                                <div ngbDropdown class="dropdown flex--0 on-hover-show__item" *ngIf="node.data.children && !isProduction" container="body">
+                                    <div class="btn btn--icon btn--integrated" ngbDropdownToggle (click)="$event.stopPropagation()">
+                                        <div class="icon-more-vertical icon-size--10"></div>
+                                    </div>
+                                    <div class="dropdown__box margin-t--3xs padding-v--sm shadow--lg" ngbDropdownMenu>
+                                        <div class="">
+                                            <div class="list list--hover list--items-no-wrap list--padded--lg list--md">
+                                                <div class="list__item" ngbDropdownItem (click)="toggleNodeEditingMode(true, node)">Edit name</div>
+                                                <div class="list__item" ngbDropdownItem (click)="addFolder(node)">New folder</div>
+                                                <div class="list__item" ngbDropdownItem (click)="addSlide(node)">New slide</div>
+                                                <div class="list__item" ngbDropdownItem (click)="deleteFolder(node)">Delete</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rows  on-focus--no-outline"
+                                [routerLink]=[node.data.state] *ngIf="!node.data.children">
+                                <div class="relative flex--1 flex min-height--xs bg--content overflow--hidden outline on-hover--pop hover--pointer" routerLinkActive="outline--bolder outline-color-primary">
+                                    <img class="width--100" src="slides-cache/{{node.data.component}}.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container
+                        [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: node, node: node, index: index, templates: templates }">
+                    </ng-container>
+                    <div [class.tree-children]="true"
+                        [class.tree-children-no-padding]="node.options.levelPadding"
+                        *treeAnimateOpen="
+            node.isExpanded;
+            speed:node.options.animateSpeed;
+            acceleration:node.options.animateAcceleration;
+            enabled:node.options.animateExpand">
+                        <tree-node-collection
+                            *ngIf="node.children"
+                            [nodes]="node.children"
+                            [templates]="templates"
+                            [treeModel]="node.treeModel">
+                        </tree-node-collection>
+                        <tree-loading-component
+                            [style.padding-left]="node.getNodePadding()"
+                            class="tree-node-loading"
+                            *ngIf="!node.children"
+                            [template]="templates.loadingTemplate"
+                            [node]="node"></tree-loading-component>
+                    </div>
+                    <tree-node-drop-slot class="block" [dropIndex]="node.index + 1" [node]="node.parent">
+                    </tree-node-drop-slot>
+                </div>
+            </ng-template>
+        </tree-root>
+    </div>
+    <div class="rows">
+        <div class="tool-bar border--b" *ngIf="!activeNodeIsFolder && !isProduction" [ngClass]="{'display--none': slideToolbarClosed || isFullscreen,'height--lg opacity--1 ': !slideToolbarClosed && !isFullscreen}">
+            <div class="btn btn--silent" (click)="editHTML()">
+                <div class="icon-edit"></div>
+                <div class="margin-l--xs">Edit HTML</div>
+            </div>
+            <div class="btn btn--silent" (click)="editTS()">
+                <div class="icon-edit"></div>
+                <div class="margin-l--xs">Edit TS</div>
+            </div>
+            <div class="btn btn--silent" (click)="duplicate()">
+                <div class="icon-copy"></div>
+                <div class="margin-l--xs">Duplicate</div>
+            </div>
+            <div class="btn btn--silent" (click)="removeActiveSlide()">
+                <div class="icon-delete"></div>
+                <div class="margin-l--xs">Delete</div>
+            </div>
+            <div class="btn btn--silent" (click)="updateSnapshots()">
+                <div class="icon-refresh"></div>
+                <div class="margin-l--xs">Update snapshot</div>
+            </div>
+            <div class="btn btn--silent" (click)="updateAllSnapshots()">
+                <div class="icon-refresh"></div>
+                <div class="margin-l--xs">Update all snapshots</div>
+            </div>
+        </div>
+        <div class="rows relative"
+            [ngClass]="{
+            'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl': !activeNodeIsFolder && !isFullscreen,
+            '': activeNodeIsFolder || isFullscreen,
+            'bg--content': !activeNodeIsFolder
+			}">
+			<iframe id="slideRender" class="stretch" [src]="slideUrl" frameborder="0"></iframe>
+			<router-outlet></router-outlet>
+		</div>
+		
+    </div>
+</div>

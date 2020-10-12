@@ -1,0 +1,5 @@
+<div class="absolute-stretch overflow--auto major bg--canvas">
+    <ng-container *ngFor="let slide of selectedNode">
+        <slides-explorer class="block absolute-stretch padding--md" [selectedNode]=selectedNode [slides]="slide.children"></slides-explorer>
+    </ng-container>
+</div>
