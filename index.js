@@ -1,5 +1,5 @@
-const updateTree = require( '../server/tasks/update-tree' );
-const server = require( '../server' );
+const updateTree = require( 'slides-server/tasks/update-tree' );
+const server = require( 'slides-server' );
 const npm = require( "npm" );
 module.exports = {
     setOptions: function ( options ) {
