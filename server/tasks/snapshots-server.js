@@ -2,7 +2,6 @@ const {Cluster} = require('puppeteer-cluster');
 var fsx = require('fs-extra');
 
 async function generate(options, states) {
-    console.log(options);
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
         maxConcurrency: 12,

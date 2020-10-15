@@ -6,7 +6,7 @@ var openInEditor = require( 'open-in-editor' );
 var updateTree = require( './tasks/update-tree.js' );
 const persistency = require( './tasks/persistency' );
 var snapshots = require( './tasks/snapshots-server' );
-const states = require('../data/tmp/routeList.json');
+// const states = require('../data/tmp/routeList.json');
 
 module.exports = {
     updateTree: updateTree,
@@ -85,7 +85,8 @@ module.exports = {
                 PORT: options.ANGULAR_PORT,
                 slidesPath: '../slides-finder/src/slides-cache'
             };
-            snapshots.generate(opt, states);
+            snapshots.generate(opt, options.routs);
+            log
         } );
 
         app.listen( options.SERVER_PORT, () => {

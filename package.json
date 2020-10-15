@@ -75,7 +75,6 @@
 		"zone.js": "^0.10.3",
 		"glyph-icons-storm": "git+ssh://git@github.houston.softwaregrp.net:yevgeniy-belov/glyph-icons-storm.git#v2.1.100",
 		"stylebox": "git+ssh://git@github.houston.softwaregrp.net:yevgeniy-belov/stylebox.git#v2.3.0",
-		"slides-generator": "git+ssh://git@github.com:cssberries/slides-generator.git#v1.1.0",
 		"chokidar": "^3.4.2",
 		"express": "^4.17.1",
 		"fs-extra": "^9.0.1",
