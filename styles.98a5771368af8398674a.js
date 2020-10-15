@@ -439,7 +439,7 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\dev\lrc-mockups\node_modules\slides-finder\src\styles.less */"./src/styles.less");
+module.exports = __webpack_require__(/*! C:\dev\cssberries-mockups\node_modules\slides-finder\src\styles.less */"./src/styles.less");
 
 
 /***/ })
