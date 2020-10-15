@@ -6,7 +6,7 @@ var openInEditor = require( 'open-in-editor' );
 var updateTree = require( './tasks/update-tree.js' );
 const persistency = require( './tasks/persistency' );
 var snapshots = require( './tasks/snapshots-server' );
-// const states = require('../data/tmp/routeList.json');
+const PATH = require( 'path' );
 
 module.exports = {
     updateTree: updateTree,
@@ -83,10 +83,9 @@ module.exports = {
                 slide: request.body.body.node,
                 force: request.body.body.force,
                 PORT: options.ANGULAR_PORT,
-                slidesPath: '../slides-finder/src/slides-cache'
+                slidesPath: PATH.normalize(`${PATH.resolve( __dirname, '../../' )}/slides-finder/src/slides-cache`)
             };
             snapshots.generate(opt, options.routs);
-            log
         } );
 
         app.listen( options.SERVER_PORT, () => {
