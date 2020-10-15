@@ -30,9 +30,8 @@ async function generate(options, states) {
     });
 
     if (options.slide) {
-        console.log(`http://localhost:5500/slides/${options.slide.state}`);
         cluster.queue({
-            url: `http://localhost:5500/slides/${options.slide.state}`,
+            url: `http://localhost:${options.PORT}/slides/${options.slide.state}`,
             slideName: options.slide.component,
         });
     } else {
@@ -48,13 +47,13 @@ async function generate(options, states) {
                         )
                     ) {
                         cluster.queue({
-                            url: `http://localhost:5500/slides/${state.path}`,
+                            url: `http://localhost:${options.PORT}/slides/${state.path}`,
                             slideName: state.componentName,
                         });
                     }
                 } else {
                     cluster.queue({
-                        url: `http://localhost:5500/slides/${state.path}`,
+                        url: `http://localhost:${options.PORT}/slides/${state.path}`,
                         slideName: state.componentName,
                     });
                 }
