@@ -82,7 +82,7 @@ module.exports = {
             let opt = {
                 slide: request.body.body.node,
                 force: request.body.body.force,
-                PORT: options.ANGULAR_PORT,
+                PORT: options.DEV_RENDER_PORT,
                 slidesPath: PATH.normalize(`${PATH.resolve( __dirname, '../../' )}/slides-finder/src/slides-cache`)
             };
             snapshots.generate(opt, options.routs);
