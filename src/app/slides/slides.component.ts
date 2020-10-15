@@ -11,9 +11,6 @@ import { Location } from '@angular/common';
 import { LayoutService } from '../layout.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-// console.log(__dirname);
-
-
 @Component({
     templateUrl: './slides.component.html',
     styles: []
@@ -75,7 +72,8 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         private location: Location,
         sanitizer: DomSanitizer
     ) {
-        this.slideUrl = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:5500/');
+        this.slideUrl = sanitizer.bypassSecurityTrustResourceUrl(`${environment.domainName}`);
+
         this._SUBSCRIPTIONS.add(this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
                 this.activeNode = this.findNodeByState(this.tree, this.router.url);

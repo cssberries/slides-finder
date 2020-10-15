@@ -1,6 +1,6 @@
 <div class="rows absolute-stretch bg--aside">
     <div class="minor height--xs border--b padding-h--md" [ngClass]="{'display--none': mastheadClosed || isFullscreen, 'opacity--1 height--xs': !mastheadClosed && !isFullscreen}">
-        <blueberry-finder-logo class="align-self--center"></blueberry-finder-logo>
+        <slides-finder-logo class="align-self--center"></slides-finder-logo>
         <div class="buttons-group buttons-group--primary align-self--center margin--l--auto">
             <div class="btn" [ngClass]="{'active': theme === 'mf--dark'}" (click)="setTheme('mf--dark')">Dark</div>
             <div class="btn" [ngClass]="{'active': theme === 'mf--light'}" (click)="setTheme('mf--light')">Light</div>
