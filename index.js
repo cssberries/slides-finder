@@ -25,6 +25,7 @@ module.exports = {
     },
     ensureRoutesList: function () {
         if (!fsx.existsSync(routeListPathPath)) {
+            fsx.ensureFileSync(routeListPathPath);
             fsx.writeFileSync( routeListPathPath, '[]', null, 4 );
         }
     },
