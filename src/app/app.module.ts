@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from 'ngx-clipboard';
+import { HotkeyModule } from 'angular2-hotkeys';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { SlidesModule } from './slides/slides.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ClipboardModule } from 'ngx-clipboard';
 import { BlueberryFinderLogo } from 'src/app/blueberry-logotype';
-// import { HotkeyModule } from 'angular2-hotkeys';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	imports: [
@@ -17,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		SlidesModule,
 		HttpClientModule,
 		ClipboardModule,
-		// HotkeyModule.forRoot(),
+		HotkeyModule.forRoot(),
 		NgbModule,
 	],
 	declarations: [

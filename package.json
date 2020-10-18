@@ -44,7 +44,6 @@
 		"@ngx-pwa/local-storage": "^10.0.01",
 		"@types/jasmine": "~3.3.8",
 		"@types/jasminewd2": "^2.0.8",
-		"@types/node": "^12.12.31",
 		"angular-cli-ghpages": "^0.6.2",
 		"angular-tree-component": "^8.5.6",
 		"angular2-hotkeys": "^2.2.0",
@@ -83,6 +82,7 @@
 		"typescript": "~3.9.7",
 		"update": "^0.7.4",
 		"uuid": "^3.4.0",
-		"zone.js": "^0.10.3"
+		"zone.js": "^0.10.3",
+		"@types/node": "^12.12.67"
 	}
 }
