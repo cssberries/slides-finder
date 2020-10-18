@@ -40,10 +40,11 @@ module.exports = {
         this.setOptions( options );
         module.exports.ensureRoutesList();
         module.exports.ensureProxyConfigs(options);
+        configs.ensureEnvDir();
         configs.setEnvDev(options);
         configs.setEnvProd(options);
         npm.load( () => {
-            npm.run( 'startBlueberryFinder' );
+            npm.run( 'startSlidesFinder' );
         } );
         updateTree.update( options );
         options.routs = JSON.parse(fsx.readFileSync(routeListPathPath, "utf8"));

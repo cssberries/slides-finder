@@ -40,5 +40,12 @@ module.exports = {
 		let path = `${envPath}environment.prod.ts`;
 		
         fsx.writeFileSync( path, content, null, 4 );
+    },
+
+    ensureEnvDir: function () {
+        let path = PATH.normalize( `${PATH.resolve( __dirname, '../../' )}/src/environments/` );
+        if (!fsx.existsSync(path)) {
+            fsx.ensureDirSync(path);
+        }
     }
 };
