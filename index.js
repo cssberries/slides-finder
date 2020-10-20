@@ -44,7 +44,7 @@ module.exports = {
         configs.setEnvDev(options);
         configs.setEnvProd(options);
         npm.load( () => {
-            npm.run( 'startSlidesFinder' );
+            npm.run( 'startFinder' );
         } );
         updateTree.update( options );
         options.routs = JSON.parse(fsx.readFileSync(routeListPathPath, "utf8"));
