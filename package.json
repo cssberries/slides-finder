@@ -44,6 +44,7 @@
 		"@ngx-pwa/local-storage": "^10.0.01",
 		"@types/jasmine": "~3.3.8",
 		"@types/jasminewd2": "^2.0.8",
+		"@types/node": "^12.12.67",
 		"angular-cli-ghpages": "^0.6.2",
 		"angular-tree-component": "^8.5.6",
 		"angular2-hotkeys": "^2.2.0",
@@ -52,6 +53,7 @@
 		"codelyzer": "^6.0.0",
 		"core-js": "^2.6.11",
 		"cross-var": "^1.1.0",
+		"directory-tree": "^2.2.5",
 		"express": "^4.17.1",
 		"fs-extra": "^9.0.1",
 		"glyph-icons-storm": "git+ssh://git@github.houston.softwaregrp.net:yevgeniy-belov/glyph-icons-storm.git#v2.1.100",
@@ -75,6 +77,7 @@
 		"randomatic": "^3.1.1",
 		"rxjs": "^6.5.4",
 		"rxjs-compat": "^6.5.4",
+		"sort-json-array": "^0.1.7",
 		"stylebox": "git+ssh://git@github.houston.softwaregrp.net:yevgeniy-belov/stylebox.git#v2.3.0",
 		"ts-node": "~7.0.0",
 		"tslib": "^2.0.3",
@@ -82,7 +85,9 @@
 		"typescript": "~3.9.7",
 		"update": "^0.7.4",
 		"uuid": "^3.4.0",
-		"zone.js": "^0.10.3",
-		"@types/node": "^12.12.67"
+		"zone.js": "^0.10.3"
+	},
+	"devDependencies": {
+		"simple-git": "^2.21.0"
 	}
 }
