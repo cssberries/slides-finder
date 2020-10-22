@@ -14,7 +14,7 @@ var dirTree = require( 'directory-tree' );
 module.exports = {
 
     setComponentName: function ( node, id ) {
-        let compPath =   node.path.replace( /\\/g, '/' );
+        let compPath = node.path.replace( /\\/g, '/' );
         let componentContent = fs.readFileSync( compPath, 'utf8' );
         let currentName = componentContent.match( /(?<=\bexport class\s)(\w+)/g );
         if ( currentName !== node.name ) {
