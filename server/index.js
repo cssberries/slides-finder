@@ -7,10 +7,11 @@ var updateTree = require( './tasks/update-tree.js' );
 const persistency = require( './tasks/persistency' );
 var snapshots = require( './tasks/snapshots-server' );
 const PATH = require( 'path' );
+const git = require( 'simple-git' )();
 
 module.exports = {
     updateTree: updateTree,
-    startServer: function (options) {
+    startServer: function ( options ) {
 
         const app = express();
         app.use( bodyParser.urlencoded( { extended: true } ) );
@@ -25,6 +26,14 @@ module.exports = {
         app.use( function ( req, res, next ) {
             req.headers['content-type'] = "application/json";
             next();
+        } );
+
+        async function gitStatus() {
+            return await git.status();
+        }
+
+        app.post( '/api/slides/git-status', ( request, response ) => {
+            console.log( gitStatus() );
         } );
 
 
@@ -83,9 +92,9 @@ module.exports = {
                 slide: request.body.body.node,
                 force: request.body.body.force,
                 PORT: options.DEV_RENDER_PORT,
-                slidesPath: PATH.normalize(`${PATH.resolve( __dirname, '../../' )}/slides-finder/src/slides-cache`)
+                slidesPath: PATH.normalize( `${PATH.resolve( __dirname, '../../' )}/slides-finder/src/slides-cache` )
             };
-            snapshots.generate(opt, options.routs);
+            snapshots.generate( opt, options.routs );
         } );
 
         app.listen( options.SERVER_PORT, () => {
