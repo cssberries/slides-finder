@@ -37,7 +37,7 @@
     "import-spacing": true,
     "indent": {
       "options": [
-        "tabs"
+        "spaces"
       ]
     },
     "interface-name": false,
