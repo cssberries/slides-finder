@@ -27,7 +27,7 @@
                         "aot": true,
                         "optimization": false,
                         "outputHashing": "all",
-                        "sourceMap": false,
+                        "sourceMap": true,
                         "extractCss": false,
                         "namedChunks": true,
                         "extractLicenses": false,
