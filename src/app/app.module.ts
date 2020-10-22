@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SlidesModule } from './slides/slides.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { BlueberryFinderLogo } from 'src/app/blueberry-logotype';
+import { BlueberryFinderLogoComponent } from 'src/app/blueberry-logotype';
 
 @NgModule({
 	imports: [
@@ -21,14 +21,12 @@ import { BlueberryFinderLogo } from 'src/app/blueberry-logotype';
 		NgbModule,
 	],
 	declarations: [
-		BlueberryFinderLogo,
+		BlueberryFinderLogoComponent,
 		AppComponent,
 		NotFoundComponent,
 	],
 	entryComponents: [],
-	exports: [
-		NgbModule
-	],
+	exports: [NgbModule],
 	bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

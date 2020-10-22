@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'slides-finder-logo',
+    selector: 'blb-slides-finder-logo',
     template: /*html*/`
   <div class="flex" style="width:100px">
     <svg class="flex stretch" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -67,7 +67,7 @@ import { Component, OnInit } from '@angular/core';
     </svg>
 </div>`
 })
-export class BlueberryFinderLogo implements OnInit {
+export class BlueberryFinderLogoComponent implements OnInit {
 
     constructor() { }
 
