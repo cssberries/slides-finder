@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlidesExplorerComponent } from './slides-explorer/slides-explorer.component';
-// import { SlideLoaderComponent } from './slide-loader.component';
-// import { SlideHostDirective } from './slide-host/slide-host.directive';
-// import { SlideService } from './slide-host/slide-host.service';
 import { SlidesList } from './slides-list.module';
 import { SlidesListMap } from './slides-list.module';
 import { SlidesComponent } from './slides.component';
@@ -22,8 +19,6 @@ import { ComponentsModule } from '../../../../../components/components.module';
     declarations: [
         SlidesExplorerComponent,
         SlidesList,
-        // SlideLoaderComponent,
-        // SlideHostDirective,
         SlidesComponent,
     ],
     imports: [
@@ -45,8 +40,6 @@ import { ComponentsModule } from '../../../../../components/components.module';
         UiComponentsModule,
         ComponentsModule,
         SlidesExplorerComponent,
-        // SlideLoaderComponent,
-        // SlideHostDirective,
         SlidesComponent,
         NgbModule
     ]
