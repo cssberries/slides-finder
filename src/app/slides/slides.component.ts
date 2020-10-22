@@ -18,6 +18,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('slidesTree', { static: false }) slidesTree;
 
+    public theme = 'mf--light';
+
     private _SUBSCRIPTIONS = new Subscription();
     public activeNodeIsFolder = true;
     public tree = persistency[0];
@@ -72,15 +74,16 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         private location: Location,
         sanitizer: DomSanitizer
     ) {
+        this.theme = this.storage.get('theme') || 'mf--light';
         this.slideUrl = sanitizer.bypassSecurityTrustResourceUrl(`${environment.domainName}`);
 
         this._SUBSCRIPTIONS.add(this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
                 this.activeNode = this.findNodeByState(this.tree, this.router.url);
-                
+
                 // console.log('NavigationEnd');
                 this.initIframe(this.activeNode.state)
-                
+
                 // replaces escaped space gotten from browser
                 this.activeNodeIsFolder = this.isFolder(this.tree, event.url.replace(/%20/g, ' '));
                 if (event.url.includes('slides')) {
@@ -223,7 +226,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public updateAllSnapshots() {
-        this.slidesService.updateSnapshots('' , true);
+        this.slidesService.updateSnapshots('', true);
     }
     public updateSnapshots() {
         this.slidesService.updateSnapshots(this.findNodeByState(this.tree, this.router.url.replace('/slides/', '').replace(/%20/g, ' ')), false);
@@ -284,8 +287,14 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     set state(state: ITreeState) {
         localStorage.treeState = JSON.stringify(state);
     }
+    public setTheme(theme: any) {
+        this.theme = theme;
+        document.firstElementChild.setAttribute('class', theme);
+        this.storage.set('theme', this.theme);
+    }
 
-    ngOnInit() {    
+    ngOnInit() {
+        this.setTheme(this.theme);
         this.router.navigate([this.activeRoute.replace(/%20/g, ' ')]);
     }
 
@@ -306,7 +315,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         this.scrollTo(node);
     }
 
-    scrollTo(node){
+    scrollTo(node) {
         const slideId = `#${node.data.id}`;
         const slidesTreeElement = document.querySelector(slideId);
         setTimeout(() => {
@@ -315,16 +324,16 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public initIframe(path) {
-		const slideRender = document.getElementById('slideRender');
-		if (!slideRender) {
-			console.log('iframe undefined...');
-			return;
-		}
+        const slideRender = document.getElementById('slideRender');
+        if (!slideRender) {
+            console.log('iframe undefined...');
+            return;
+        }
 
-		const iWindow = ( slideRender as HTMLIFrameElement).contentWindow;
+        const iWindow = (slideRender as HTMLIFrameElement).contentWindow;
 
-		iWindow.postMessage( { route: path, type: 'navigation'}, '*');
-	}
+        iWindow.postMessage({ route: path, type: 'navigation' }, '*');
+    }
 
     ngAfterViewInit() {
         setTimeout(() => {
