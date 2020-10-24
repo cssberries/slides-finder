@@ -1,3 +1,4 @@
+const modular = require( './modular.js' );
 module.exports = ( isProd ) => ( {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -14,10 +15,10 @@ module.exports = ( isProd ) => ( {
   presets: [],
   theme: {
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
+      // sm: '640px',
+      // md: '768px',
+      // lg: '1024px',
+      // xl: '1280px',
     },
     colors: {
       transparent: 'transparent',
@@ -137,6 +138,33 @@ module.exports = ( isProd ) => ( {
         900: '#702459',
       },
     },
+
+    dimensions: {
+      px: '1px',
+      '0': '0',
+      'micro-xxs': '1px',
+      'micro-xs': '2px',
+      'micro-sm': '4px',
+      'micro-md': '6px',
+      'micro-lg': '9px',
+      'micro-xl': '14px',
+      'micro-xxl': '20px',
+      'xxs': '30px',
+      'xs': '50px',
+      'sm': '81px',
+      'md': '131px',
+      'lg': '212px',
+      'xl': '343px',
+      'xxl': '555px',
+      'macro--xxs': '898px',
+      'macro--xs': '1453px',
+      'macro--sm': '2351px',
+      'macro--md': '3804px',
+      'macro--lg': '6155px',
+      'macro--xl': '9959px',
+      'macro--xxl': '16114px',
+
+    },
     spacing: {
       px: '1px',
       '0': '0',
@@ -240,6 +268,7 @@ module.exports = ( isProd ) => ( {
       current: 'currentColor',
     },
     flex: {
+      '0': '0 0 auto',
       '1': '1 1 0%',
       auto: '1 1 auto',
       initial: '0 1 auto',
@@ -297,7 +326,7 @@ module.exports = ( isProd ) => ( {
     },
     height: theme => ( {
       auto: 'auto',
-      ...theme( 'spacing' ),
+      ...theme( 'dimensions' ),
       full: '100%',
       screen: '100vh',
     } ),
@@ -426,7 +455,7 @@ module.exports = ( isProd ) => ( {
     textOpacity: theme => theme( 'opacity' ),
     width: theme => ( {
       auto: 'auto',
-      ...theme( 'spacing' ),
+      ...theme( 'dimensions' ),
       '1/2': '50%',
       '1/3': '33.333333%',
       '2/3': '66.666667%',

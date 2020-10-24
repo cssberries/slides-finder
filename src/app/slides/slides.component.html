@@ -1,13 +1,13 @@
-<div class="major absolute-stretch bg--canvas">
+<div class="flex flex-1 absolute h-full w-full bg-red-500">
 	<div
-		class="flex flex--0 flex-direction--column border--r bg--aside"
+		class="flex flex-0 flex-col b-r bg-gray-200"
 		[ngClass]="{
-			'width--0 opacity--0 ': sidebarClosed || isFullscreen,
-			'width--xl opacity--1 ': !sidebarClosed && !isFullscreen
+			'w-0 opacity-0 ': sidebarClosed || isFullscreen,
+			'w-xl opacity-100 ': !sidebarClosed && !isFullscreen
 		}"
 	>
-		<div class="tool-bar border--b">
-			<div class="input-block input-block--integrated-controls flex--1">
+		<div class="tool-bar border-b">
+			<div class="input-block input-block--integrated-controls flex-1">
 				<input
 					class="input-block__input"
 					id="filter"
@@ -27,7 +27,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="margin--l--auto minor padding-l--xs">
+			<div class="m-l-auto minor p-l-xs">
 				<button
 					class="btn btn--icon btn--silent"
 					title="Collapse all"
@@ -39,7 +39,7 @@
 		</div>
 		<tree-root
 			id="slidesTree"
-			class="rows"
+			class="flex flex-1 flex-col"
 			[focused]="true"
 			[nodes]="nodes"
 			[options]="treeOptions"
@@ -79,7 +79,7 @@
 							></div>
 						</div>
 						<div
-							class="rows"
+							class="flex flex-1 flex-col"
 							[routerLink]="[node.data.state]"
 							(click)="node.mouseAction('click', $event)"
 							(dblclick)="node.mouseAction('dblClick', $event)"
@@ -144,7 +144,7 @@
 								</div>
 							</div>
 							<div
-								class="rows on-focus--no-outline"
+								class="flex flex-1 flex-col on-focus--no-outline"
 								[routerLink]="[node.data.state]"
 								*ngIf="!node.data.children"
 							>
@@ -193,38 +193,38 @@
 			</ng-template>
 		</tree-root>
 	</div>
-	<div class="rows">
+	<div class="flex flex-1 flex-col">
 		<div
 			class="tool-bar border--b"
 			[ngClass]="{
-				'display--none': slideToolbarClosed || isFullscreen,
-				'height--lg opacity--1 ': !slideToolbarClosed && !isFullscreen
+				'display-none': slideToolbarClosed || isFullscreen,
+				'hlg opacity-100 ': !slideToolbarClosed && !isFullscreen
 			}"
 		>
-			<div class="flex align-items--center" *ngIf="!activeNodeIsFolder && !isProduction">
+			<div class="flex items-center" *ngIf="!activeNodeIsFolder && !isProduction">
 				<div class="btn btn--silent" (click)="editHTML()">
 					<div class="icon-edit"></div>
-					<div class="margin-l--xs">Edit HTML</div>
+					<div class="m-l-xs">Edit HTML</div>
 				</div>
 				<div class="btn btn--silent" (click)="editTS()">
 					<div class="icon-edit"></div>
-					<div class="margin-l--xs">Edit TS</div>
+					<div class="m-l-xs">Edit TS</div>
 				</div>
 				<div class="btn btn--silent" (click)="duplicate()">
 					<div class="icon-copy"></div>
-					<div class="margin-l--xs">Duplicate</div>
+					<div class="m-l-xs">Duplicate</div>
 				</div>
 				<div class="btn btn--silent" (click)="removeActiveSlide()">
 					<div class="icon-delete"></div>
-					<div class="margin-l--xs">Delete</div>
+					<div class="m-l-xs">Delete</div>
 				</div>
 				<div class="btn btn--silent" (click)="updateSnapshots()">
 					<div class="icon-refresh"></div>
-					<div class="margin-l--xs">Update snapshot</div>
+					<div class="m-l-xs">Update snapshot</div>
 				</div>
 				<div class="btn btn--silent" (click)="updateAllSnapshots()">
 					<div class="icon-refresh"></div>
-					<div class="margin-l--xs">Update all snapshots</div>
+					<div class="m-l-xs">Update all snapshots</div>
 				</div>
 			</div>
 			<div class="buttons-group buttons-group--primary align-self--center margin--l--auto">
@@ -236,15 +236,15 @@
 			</div>
 		</div>
 		<div
-			class="rows relative"
+			class="flex flex-1 flex-col relative"
 			[ngClass]="{
-				'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl':
+				'bg-white round-md overflow-hidden shadow-md shadow-strong margin--xl':
 					!activeNodeIsFolder && !isFullscreen,
 				'': activeNodeIsFolder || isFullscreen,
-				'bg--content': !activeNodeIsFolder
+				'bg-white': !activeNodeIsFolder
 			}"
 		>
-			<iframe id="slideRender" class="stretch" [src]="slideUrl" frameborder="0"></iframe>
+			<iframe id="slideRender" class="h-full w-full" [src]="slideUrl" frameborder="0"></iframe>
 			<router-outlet></router-outlet>
 		</div>
 	</div>
