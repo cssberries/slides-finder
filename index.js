@@ -12,10 +12,8 @@ module.exports = {
     setOptions: function ( options ) {
         options['slidesTreePath'] = `${__dirname}/tree.json`;
         options['routesListPath'] = `${__dirname}/routeList.json`;
-        options['slidesListModulePathRender'] = 'node_modules/slides-render-angular/src/app/slides/slides-list.module.ts';
         options['slidesListModulePathFinder'] = 'node_modules/slides-finder/src/app/slides/slides-list.module.ts';
         options['slidesListingComponentPath'] = `.`;
-        options['slidesRenderComponentPath'] = `.`;
         options['slidesDir'] = 'mockups';
         options['DOMAIN_NAME'] = options.DOMAIN_NAME;
         process.env['ANGULAR_PORT'] = options.ANGULAR_PORT;
