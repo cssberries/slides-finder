@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
-import { HotkeyModule } from 'angular2-hotkeys';
+// import { HotkeyModule } from 'angular2-hotkeys';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { BlueberryFinderLogoComponent } from 'src/app/blueberry-logotype';
 		SlidesModule,
 		HttpClientModule,
 		ClipboardModule,
-		HotkeyModule.forRoot(),
+		// HotkeyModule.forRoot(),
 		NgbModule,
 	],
 	declarations: [
