@@ -1,6 +1,6 @@
 {
 	"name": "slides-finder",
-	"version": "6.2.0",
+	"version": "6.2.1",
 	"main": "index.js",
 	"repository": {
 		"type": "git",
