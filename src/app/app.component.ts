@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './storage.service';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { HotkeysService, Hotkey } from 'cssberries-angular2-hotkeys';
 import { SlidesService } from './slides/slides.service';
 import { environment } from 'src/environments/environment';
 import { LayoutService } from './layout.service';
