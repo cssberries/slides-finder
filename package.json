@@ -47,7 +47,7 @@
 		"@types/node": "^12.12.67",
 		"angular-cli-ghpages": "^0.6.2",
 		"angular-tree-component": "^8.5.6",
-		"angular2-hotkeys": "^2.2.0",
+		"angular2-hotkeys": "git+ssh://git@github.com:cssberries/angular2-hotkeys.git#v2.2.1",
 		"body-parser": "^1.19.0",
 		"chokidar": "^3.4.2",
 		"codelyzer": "^6.0.0",
