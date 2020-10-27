@@ -325,6 +325,8 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public initIframe(path) {
         const slideRender = document.getElementById('slideRender');
+        console.log('iframe initiated');
+
         if (!slideRender) {
             console.log('iframe undefined...');
             return;

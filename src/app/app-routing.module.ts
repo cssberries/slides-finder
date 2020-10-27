@@ -9,7 +9,7 @@ const routs: Routes = [
 				(m) => m.SlidesModule
 			),
 	},
-	{ path: '', redirectTo: 'projects', pathMatch: 'full' },
+	{ path: '', redirectTo: 'slides/mockups', pathMatch: 'full' },
 ]
 
 
