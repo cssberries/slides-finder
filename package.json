@@ -22,7 +22,7 @@
 		"lint": "ng lint",
 		"e2e": "ng e2e"
 	},
-	"private": true,
+	"private": false,
 	"dependencies": {
 		"@angular-builders/custom-webpack": "^10.0.1",
 		"@angular-devkit/build-angular": "^0.1000.7",
@@ -84,7 +84,7 @@
 		"update": "^0.7.4",
 		"uuid": "^3.4.0",
 		"zone.js": "^0.10.3",
-		"box": "git+ssh://git@github.com:cssberries/box.git#v1.0.1",
-		"cssberries-icons": "git+ssh://git@github.com:cssberries/icons.git#v1.1.0"
+		"cssberries": "1.0.1",
+		"cssberries-icons": "1.1.0"
 	}
 }
