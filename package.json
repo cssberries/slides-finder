@@ -84,6 +84,7 @@
 		"update": "^0.7.4",
 		"uuid": "^3.4.0",
 		"zone.js": "^0.10.3",
-		"box": "git+ssh://git@github.com:cssberries/box.git#v1.0.1"
+		"box": "git+ssh://git@github.com:cssberries/box.git#v1.0.1",
+		"cssberries-icons": "git+ssh://git@github.com:cssberries/icons.git#v1.1.0"
 	}
 }
