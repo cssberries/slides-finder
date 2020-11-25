@@ -1,6 +1,6 @@
 <div class="major absolute-stretch bg--canvas">
 	<div
-		class="flex flex--0 flex-direction--column border--r bg--aside"
+		class="flex flex--0 flex-direction--column border--r bg--aside transition--sm"
 		[ngClass]="{
 			'width--0 opacity--0 ': sidebarClosed || isFullscreen,
 			'width--xl opacity--1 ': !sidebarClosed && !isFullscreen
@@ -195,10 +195,10 @@
 	</div>
 	<div class="rows">
 		<div
-			class="tool-bar border--b"
+			class="tool-bar transition--sm"
 			[ngClass]="{
-				'display--none': slideToolbarClosed || isFullscreen,
-				'height--lg opacity--1 ': !slideToolbarClosed && !isFullscreen
+				'height--0 opacity--0': slideToolbarClosed || isFullscreen,
+				'height--lg opacity--1 border--b ': !slideToolbarClosed && !isFullscreen
 			}"
 		>
 			<div class="flex align-items--center" *ngIf="!activeNodeIsFolder && !isProduction">
@@ -227,16 +227,14 @@
 					<div class="margin-l--xs">Update all snapshots</div>
 				</div>
 			</div>
-			<div class="buttons-group buttons-group--primary align-self--center margin--l--auto">
+			<div class="buttons-group buttons-group--xs buttons-group--primary align-self--center margin--l--auto">
 				<div class="btn" [ngClass]="{ active: theme === 'mf--dark' }" (click)="setTheme('mf--dark')">Dark</div>
-				<div class="btn" [ngClass]="{ active: theme === 'mf--light' }" (click)="setTheme('mf--light')">
-					Light
-				</div>
+				<div class="btn" [ngClass]="{ active: theme === 'mf--light' }" (click)="setTheme('mf--light')">Light</div>
 				<div class="btn" [ngClass]="{ active: theme === 'sketch' }" (click)="setTheme('sketch')">Sketch</div>
 			</div>
 		</div>
 		<div
-			class="rows relative"
+			class="rows relative transition--sm"
 			[ngClass]="{
 				'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl':
 					!activeNodeIsFolder && !isFullscreen,

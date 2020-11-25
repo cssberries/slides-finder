@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { LayoutService } from '../layout.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IframeService } from '../iframe.service';
 
 @Component({
     templateUrl: './slides.component.html',
@@ -72,6 +73,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         private slidesService: SlidesService,
         private layoutSvc: LayoutService,
         private location: Location,
+        private iframeSvc: IframeService,
         sanitizer: DomSanitizer
     ) {
         this.theme = this.storage.get('theme') || 'mf--light';
@@ -287,10 +289,12 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     set state(state: ITreeState) {
         localStorage.treeState = JSON.stringify(state);
     }
-    public setTheme(theme: any) {
-        this.theme = theme;
-        document.firstElementChild.setAttribute('class', theme);
+    public setTheme(themeName: any) {
+        this.theme = themeName;
+        document.firstElementChild.setAttribute('class', themeName);
         this.storage.set('theme', this.theme);
+        this.iframeSvc.sendMessage({ type: 'theme', theme: themeName })
+
     }
 
     ngOnInit() {
@@ -344,7 +348,8 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
                 const someNode = this.slidesTree.treeModel.getNodeById(node.id);
                 this.expandParent(someNode);
             }
-            this.initIframe(this.activeNode.state)
+            this.iframeSvc.sendMessage({ type: 'theme', theme: this.theme })
+            this.initIframe(this.activeNode.state);
         }, 1000);
     }
 }

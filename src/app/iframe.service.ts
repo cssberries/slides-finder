@@ -1,4 +1,4 @@
-   import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LayoutService } from './layout.service';
 import { StorageService } from './storage.service';
 
@@ -6,10 +6,14 @@ import { StorageService } from './storage.service';
 	providedIn: 'root',
 })
 export class IframeService {
+
+	private slideRender: any;
+	private iWindow: any;
+
 	constructor(
 		public layoutSvc: LayoutService,
 		private storage: StorageService
-	) {}
+	) { }
 
 	public addEventListener() {
 		window.addEventListener(
@@ -19,6 +23,8 @@ export class IframeService {
 	}
 
 	public handleIframeEventListener(event) {
+		// console.log(event);
+
 		switch (event.data) {
 			case 'shift+shift+/':
 				this.layoutSvc.toggleMasthead();
@@ -44,15 +50,30 @@ export class IframeService {
 		}
 	}
 
-	public navigate(path) {
-		const slideRender = document.getElementById('slideRender');
-		if (!slideRender) {
+	private initIframe() {
+		this.slideRender = document.getElementById('slideRender');
+		if (!this.slideRender) {
 			console.log('iframe undefined...');
 			return;
 		}
 
-		const iWindow = (slideRender as HTMLIFrameElement).contentWindow;
+		this.iWindow = (this.slideRender as HTMLIFrameElement).contentWindow;
+	}
 
-		iWindow.postMessage({ route: path, type: 'navigation' }, '*');
+	public navigate(path) {
+		if (this.iWindow === undefined) {
+			this.initIframe();
+		}
+
+
+		this.iWindow.postMessage({ route: path, type: 'navigation' }, '*');
+	}
+
+	public sendMessage(opt) {
+		console.log('sending a message...');
+		if (this.iWindow === undefined) {
+			this.initIframe();
+		}
+		this.iWindow.postMessage(opt, '*');
 	}
 }

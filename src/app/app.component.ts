@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { StorageService } from './storage.service';
 // import { HotkeysService, Hotkey } from 'cssberries-angular2-hotkeys';
 import { SlidesService } from './slides/slides.service';
@@ -12,6 +12,11 @@ import { IframeService } from './iframe.service';
 	templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+
+	@HostListener('document:keydown.shift.f') toggleFullscreen(event: KeyboardEvent) {
+		this.layoutSvc.toggleFullscreen();
+	}
+
 	public theme = 'mf--light';
 	public mastheadClosed: boolean;
 	public isFullscreen: boolean;
@@ -20,7 +25,6 @@ export class AppComponent implements OnInit {
 	subscription: Subscription;
 	constructor(
 		private storage: StorageService,
-		// private _hotkeysService: HotkeysService,
 		public layoutSvc: LayoutService,
 		public iframeSvc: IframeService,
 		private SlidesSvs: SlidesService
@@ -33,56 +37,13 @@ export class AppComponent implements OnInit {
 		this.layoutSvc.isFullscreen$.subscribe(
 			(val) => (this.isFullscreen = val)
 		);
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('ctrl+shift+/', (event: KeyboardEvent): boolean => {
-		// 		this.layoutSvc.toggleMasthead();
-		// 		return false;
-		// 	})
-		// );
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('ctrl+alt+l', (event: KeyboardEvent): boolean => {
-		// 		this.layoutSvc.toggleSlideLabels();
-		// 		return false;
-		// 	})
-		// );
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('ctrl+/', (event: KeyboardEvent): boolean => {
-		// 		this.layoutSvc.toggleSidebar();
-		// 		return false;
-		// 	})
-		// );
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('ctrl+alt+b', (event: KeyboardEvent): boolean => {
-		// 		this.layoutSvc.toggleSlideToolbarClosed();
-		// 		return false;
-		// 	})
-		// );
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('shift+f', (event: KeyboardEvent): boolean => {
-		// 		this.layoutSvc.toggleFullscreen();
-		// 		return false;
-		// 	})
-		// );
-
-		// this._hotkeysService.add(
-		// 	new Hotkey('escape', (event: KeyboardEvent): boolean => {
-		// 		if (this.storage.get('isFullscreen') === 'true') {
-		// 			this.layoutSvc.toggleFullscreen();
-		// 			return false;
-		// 		}
-		// 	})
-		// );
 	}
 
 	public setTheme(theme: any) {
 		this.theme = theme;
 		document.firstElementChild.setAttribute('class', theme);
 		this.storage.set('theme', this.theme);
+		// this.iframeSvc.sendMessage({ type: 'theme' });
 	}
 	public gitStatus() {
 		this.SlidesSvs.gitStatus();
