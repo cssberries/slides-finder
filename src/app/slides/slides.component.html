@@ -1,6 +1,6 @@
 <div class="major absolute-stretch bg--canvas">
 	<div
-		class="flex flex--0 flex-direction--column border--r bg--aside transition--sm"
+		class="flex flex--0 flex-direction--column border--r bg--aside transition--xs"
 		[ngClass]="{
 			'width--0 opacity--0 ': sidebarClosed || isFullscreen,
 			'width--xl opacity--1 ': !sidebarClosed && !isFullscreen
@@ -195,7 +195,7 @@
 	</div>
 	<div class="rows">
 		<div
-			class="tool-bar transition--sm"
+			class="tool-bar transition--xs"
 			[ngClass]="{
 				'height--0 opacity--0': slideToolbarClosed || isFullscreen,
 				'height--lg opacity--1 border--b ': !slideToolbarClosed && !isFullscreen
@@ -234,7 +234,7 @@
 			</div>
 		</div>
 		<div
-			class="rows relative transition--sm"
+			class="rows relative transition--xs"
 			[ngClass]="{
 				'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl':
 					!activeNodeIsFolder && !isFullscreen,
