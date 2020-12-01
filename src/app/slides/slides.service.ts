@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Slide } from './slide';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +16,10 @@ export class SlidesService {
 
     constructor(
         private http: HttpClient) { }
+
+    getPersistency(): Observable<Slide> {
+        return this.http.get<Slide>('assets/tree.json');
+    }
 
     updateSnapshots(node, force) {
         const options = {

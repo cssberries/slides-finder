@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { TREE_ACTIONS, KEYS, ITreeState, ITreeOptions, TreeModel, TreeNode } from 'angular-tree-component';
-import persistency from '../../../../../tree.json';
-import { Router, Event, NavigationEnd } from '@angular/router';
-import { SlidesList } from './slides-list.module';
+import { Router, Event, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
+import { SlidesList } from '../../../../../slides-list.module';
 import { StorageService } from '../storage.service';
 import { SlidesService } from './slides.service';
 import { Subscription } from 'rxjs';
@@ -23,8 +22,9 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private _SUBSCRIPTIONS = new Subscription();
     public activeNodeIsFolder = true;
-    public tree = persistency[0];
-    public nodes: any = persistency;
+    public persistency = [];
+    public tree: any;
+    public nodes: any;
     public sidebarClosed;
     public slideToolbarClosed;
     public isFullscreen;
@@ -69,6 +69,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private storage: StorageService,
         private slidesService: SlidesService,
         private layoutSvc: LayoutService,
@@ -76,6 +77,14 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         private iframeSvc: IframeService,
         sanitizer: DomSanitizer
     ) {
+        this.route.data
+            .subscribe(
+                (data: Data) => {
+                    this.persistency = data['slides'];
+                    this.tree = this.persistency[0];
+                    this.nodes = this.persistency;
+                }
+            );
         this.theme = this.storage.get('theme') || 'mf--light';
         this.slideUrl = sanitizer.bypassSecurityTrustResourceUrl(`${environment.domainName}`);
 
@@ -298,6 +307,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit() {
+
         this.setTheme(this.theme);
         this.router.navigate([this.activeRoute.replace(/%20/g, ' ')]);
     }
@@ -329,7 +339,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public initIframe(path) {
         const slideRender = document.getElementById('slideRender');
-        console.log('iframe initiated');
+        // console.log('iframe initiated');
 
         if (!slideRender) {
             console.log('iframe undefined...');

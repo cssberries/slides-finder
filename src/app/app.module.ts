@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
-// import { HotkeyModule } from 'angular2-hotkeys';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SlidesModule } from './slides/slides.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BlueberryFinderLogoComponent } from 'src/app/blueberry-logotype';
+import { PersistencyResolver } from './persistency-resolver.service';
 
 @NgModule({
 	imports: [
@@ -17,7 +17,6 @@ import { BlueberryFinderLogoComponent } from 'src/app/blueberry-logotype';
 		SlidesModule,
 		HttpClientModule,
 		ClipboardModule,
-		// HotkeyModule.forRoot(),
 		NgbModule,
 	],
 	declarations: [
@@ -25,7 +24,7 @@ import { BlueberryFinderLogoComponent } from 'src/app/blueberry-logotype';
 		AppComponent,
 		NotFoundComponent,
 	],
-	entryComponents: [],
+	providers: [PersistencyResolver],
 	exports: [NgbModule],
 	bootstrap: [AppComponent],
 })

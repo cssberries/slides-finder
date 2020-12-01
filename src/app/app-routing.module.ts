@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PersistencyResolver } from './persistency-resolver.service';
+
 
 const routs: Routes = [
 	{
 		path: 'slides',
+		resolve: {
+			slides: PersistencyResolver
+		},
 		loadChildren: () =>
 			import('./slides/slides.module').then(
 				(m) => m.SlidesModule

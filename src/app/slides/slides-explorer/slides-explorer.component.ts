@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SlidesService } from 'src/app/slides/slides.service';
-import tree from '../../../../../../tree.json';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { LayoutService } from 'src/app/layout.service';
 import { Subscription } from 'rxjs';
 
@@ -13,8 +12,23 @@ export class SlidesExplorerComponent implements OnInit {
     @Input() slides;
     @Input() selectedNode;
     private _subscriptions = new Subscription();
+    public tree: any;
 
-    constructor(private SlidesService: SlidesService, private router: Router, private layoutSvc: LayoutService,) {
+    constructor(
+        private SlidesService: SlidesService,
+        private router: Router,
+        private layoutSvc: LayoutService,
+        private activatedRoute: ActivatedRoute,
+    ) {
+        this.activatedRoute.parent.data
+            .subscribe(
+                (data: Data) => {
+                    // console.log('slides data arrived');
+
+                    this.tree = data['slides'];
+                    // console.log(this.tree);
+                }
+            );
         this._subscriptions.add(this.layoutSvc.slideLabelsHidden$.subscribe(val => this.slideLabelsHidden = val));
     }
     public route = '';
@@ -63,7 +77,7 @@ export class SlidesExplorerComponent implements OnInit {
     }
     public remove(path) {
         event.stopPropagation();
-        this.SlidesService.deleteSlide(this.findNode(tree[0], path));
+        this.SlidesService.deleteSlide(this.findNode(this.tree[0], path));
     }
 
     ngOnInit() {
