@@ -1,11 +1,12 @@
+const importFresh = require( 'import-fresh' );
 var express = require( 'express' );
-const newSlide = require( './tasks/new-slide.js' );
-const duplicateSlide = require( './tasks/duplicate-slide.js' );
+const newSlide = importFresh( './tasks/new-slide.js' );
+const duplicateSlide = importFresh( './tasks/duplicate-slide.js' );
 const bodyParser = require( 'body-parser' );
 var openInEditor = require( 'open-in-editor' );
-var updateTree = require( './tasks/update-tree.js' );
-const persistency = require( './tasks/persistency' );
-var snapshots = require( './tasks/snapshots-server' );
+var updateTree = importFresh( './tasks/update-tree.js' );
+const persistency = importFresh( './tasks/persistency' );
+var snapshots = importFresh( './tasks/snapshots-server' );
 const PATH = require( 'path' );
 const git = require( 'simple-git' )();
 
@@ -32,6 +33,10 @@ module.exports = {
             return await git.status();
         }
 
+        // app.get( '/api/data/slides', ( request, response ) => {
+        //     response.send( persistency.tree() );
+        // } );
+
         app.post( '/api/slides/git-status', ( request, response ) => {
             console.log( gitStatus() );
         } );
@@ -51,7 +56,7 @@ module.exports = {
         } );
 
         app.post( '/api/slides/editTS', ( request, response ) => {
-            editor.open( `mockups/${request.body.body.node.id}/component.ts` )
+            editor.open( `render/mockups/${request.body.body.node.id}/component.ts` )
                 .then( function () {
                     console.log( `open: ${request.body.body.node.id}/component.ts` );
                 }, function ( err ) {
@@ -60,7 +65,7 @@ module.exports = {
         } );
 
         app.post( '/api/slides/editHTML', ( request, response ) => {
-            editor.open( `mockups/${request.body.body.node.id}/template.html` )
+            editor.open( `render/mockups/${request.body.body.node.id}/template.html` )
                 .then( function () {
                     console.log( `open: ${request.body.body.node.id}/template.html` );
                 }, function ( err ) {
@@ -76,6 +81,7 @@ module.exports = {
 
         app.post( '/api/slides/blank', ( request, response ) => {
             slideName = newSlide.blank();
+            console.log( slideName );
             persistency.assignSlide( slideName, request.body.body, options );
         } );
 
@@ -90,7 +96,8 @@ module.exports = {
         app.post( '/api/slides/updateSnapshots', ( request, response ) => {
             let opt = {
                 slide: request.body.body.node,
-                force: request.body.body.force,
+                force: true,
+                // force: request.body.body.force,
                 PORT: options.DEV_RENDER_PORT,
                 slidesPath: PATH.normalize( `${PATH.resolve( __dirname, '../../' )}/slides-finder/src/slides-cache` )
             };
