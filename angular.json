@@ -39,7 +39,7 @@
 							"src/assets",
 							{
 								"glob": "**/*",
-								"input": "../../data",
+								"input": "../../../persistency",
 								"output": "./assets"
 							}
 						],

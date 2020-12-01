@@ -26,7 +26,7 @@ module.exports = {
 	create: function (options) {
 		fsx.ensureDirSync( 'mockups' );
 		console.log(tree);
-		fsx.writeFileSync( 'tree.json', tree, null, 4, function ( err ) {
+        fsx.writeFileSync( 'persistency/tree.json', tree, null, 4, function ( err ) {
             if ( err ) {
                 response.send( "failed to save" );
             } else {

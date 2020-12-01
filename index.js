@@ -1,19 +1,20 @@
-const updateTree = require( './server/tasks/update-tree' );
-const server = require( './server' );
-const configs = require( './server/tasks/configs.js' );
+const importFresh = require( 'import-fresh' );
+const updateTree = importFresh( './server/tasks/update-tree' );
+const server = importFresh( './server' );
+const configs = importFresh( './server/tasks/configs.js' );
 const npm = require( 'npm' );
 const fsx = require( 'fs-extra' )
 const PATH = require( 'path' );
 const routeListPathPath = PATH.normalize( `${PATH.resolve( __dirname, './' )}/data/tmp/routeList.json` );
 const proxyConfigsPath = PATH.normalize( `${PATH.resolve( __dirname, '../../' )}/proxy.conf.json` );
-const listAll = require( './server/tasks/list-all-slides' );
+const listAll = importFresh( './server/tasks/list-all-slides' );
 
 module.exports = {
     setOptions: function ( options ) {
         options['slidesTreePath'] = `${__dirname}/tree.json`;
         options['routesListPath'] = `${__dirname}/routeList.json`;
-        options['slidesListModulePathFinder'] = 'node_modules/slides-finder/src/app/slides/slides-list.module.ts';
-        options['slidesListingComponentPath'] = `.`;
+        options['slidesListModulePathFinder'] = 'finder/slides-list.module.ts';
+        options['slidesListingComponentPath'] = './node_modules/slides-finder/src/app/slides/slides-listing/slides-listing.component';
         options['slidesDir'] = 'mockups';
         options['DOMAIN_NAME'] = options.DOMAIN_NAME;
         process.env['ANGULAR_PORT'] = options.ANGULAR_PORT;

@@ -39,10 +39,10 @@ import { HttpClient } from '@angular/common/http';
         styleContent = `
 @import "../../styles";
 `;
-        let component = `mockups/${slideName}/component.ts`;
-        let template = `mockups/${slideName}/template.html`;
-        let style = `mockups/${slideName}/style.less`;
-        fs.ensureDirSync( `mockups/${slideName}` );
+        let component = `render/mockups/${slideName}/component.ts`;
+        let template = `render/mockups/${slideName}/template.html`;
+        let style = `render/mockups/${slideName}/style.less`;
+        fs.ensureDirSync( `render/mockups/${slideName}` );
         fs.writeFileSync( component, componentContent );
         fs.writeFileSync( template, templateContent );
         fs.writeFileSync( style, styleContent );
@@ -93,10 +93,10 @@ private http: HttpClient,
 </div>
 `;
 
-        let component = `mockups/${slideName}/component.ts`;
-        let template = `mockups/${slideName}/template.html`;
-        let style = `mockups/${slideName}/style.less`;
-        fs.ensureDirSync( `mockups/${slideName}` );
+        let component = `render/mockups/${slideName}/component.ts`;
+        let template = `render/mockups/${slideName}/template.html`;
+        let style = `render/mockups/${slideName}/style.less`;
+        fs.ensureDirSync( `render/mockups/${slideName}` );
         fs.writeFileSync( component, componentContent );
         fs.writeFileSync( template, templateContent );
         return `${slideName}`

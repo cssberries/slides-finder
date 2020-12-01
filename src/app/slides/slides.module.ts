@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlidesExplorerComponent } from './slides-explorer/slides-explorer.component';
-import { SlidesList } from './slides-list.module';
-import { SlidesListMap } from './slides-list.module';
+import { SlidesList } from '../../../../../../finder/slides-list.module';
+import { SlidesListMap } from '../../../../../../finder/slides-list.module';
 import { SlidesComponent } from './slides.component';
 import { RouterModule } from '@angular/router';
 import { TreeModule } from 'angular-tree-component';
@@ -12,7 +12,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { SlidesRoutingModule } from './slides-routing.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentsModule } from '../../../../../components/components.module';
+import { ComponentsModule } from '../../../../../../render/components/components.module';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ComponentsModule } from '../../../../../components/components.module';
         SlidesExplorerComponent,
         SlidesList,
         SlidesComponent,
-    ],
+    ],  
     imports: [
         FormsModule,
         UiComponentsModule,

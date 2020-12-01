@@ -40,9 +40,9 @@ module.exports = {
         }
         node.path = node.path.replace( /\\/g, '/' ).replace( 'src/', '' );
         slide.id = node.path.replace( 'mockups/', '' ).replace( '/component.ts', '' );
-        slide.slidePath = `mockups/${slide.id}`;
+        slide.slidePath = `render/mockups/${slide.id}`;
         slide.name = slide.id;
-        slide.state = `mockups/${slide.id}`;
+        slide.state = `render/mockups/${slide.id}`;
         slide.index = this.getIndex( node.name );
         slide.component = slide.id;
         if ( node.children ) {
@@ -68,6 +68,6 @@ module.exports = {
     },
     run: function ( options ) {
         this.traverseTree( this.getTree( options.slidesTreePath ) );
-        fs.writeFileSync( 'tree.json', JSON.stringify( slides, null, 4 ).replace( /\\\\/g, '/' ) );
+        fs.writeFileSync( 'persistency/tree.json', JSON.stringify( slides, null, 4 ).replace( /\\\\/g, '/' ) );
     }
 };

@@ -46,8 +46,8 @@ module.exports = {
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SlidesListingComponent } from '${options.slidesListingComponentPath}/slides-listing/slides-listing.component';
-import { SlidesRenderComponent } from '${options.slidesRenderComponentPath}/slides-render/slides-render.component';
+import { SlidesListingComponent } from '${options.slidesListingComponentPath}';
+import { SlidesRenderComponent } from '${options.slidesRenderComponentPath}';
 
 ${imports.join( '\n' )}
 

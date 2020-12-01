@@ -52,7 +52,7 @@ module.exports = {
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SlidesListingComponent } from '${options.slidesListingComponentPath}/slides-listing/slides-listing.component';
+import { SlidesListingComponent } from '${options.slidesListingComponentRenderPath}';
 
 ${imports.join( '\n' )}
 
@@ -75,7 +75,7 @@ ${listMap.join( ',\n' )}
     setImportDeclaration: function ( name, path, options ) {
         if ( name !== 'SlidesComponent' ) {
             let newPath = PATH.join( '', PATH.normalize( path ) );
-            let relativePathToMockups = '../';
+            let relativePathToMockups = '';
             return `import { ${name} } from '${relativePathToMockups}${newPath.replace( /\\/g, '/' ).replace( '.ts', '' )}';`
 
         }
