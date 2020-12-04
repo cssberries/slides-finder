@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlidesExplorerComponent } from './slides-explorer/slides-explorer.component';
 import { SlidesList } from '../../../../../../finder/slides-list.module';
-import { SlidesListMap } from '../../../../../../finder/slides-list.module';
+// import { SlidesListMap } from '../../../../../../finder/slides-list.module';
 import { SlidesComponent } from './slides.component';
 import { RouterModule } from '@angular/router';
 import { TreeModule } from 'angular-tree-component';
@@ -13,8 +13,7 @@ import { SlidesRoutingModule } from './slides-routing.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from '../../../../../../render/components/components.module';
-
-
+import { AngularSplitModule } from "angular-split";
 @NgModule({
     declarations: [
         SlidesExplorerComponent,
@@ -31,7 +30,8 @@ import { ComponentsModule } from '../../../../../../render/components/components
         ClickOutsideModule,
         DragDropModule,
         ComponentsModule,
-        NgbModule
+        NgbModule,
+        AngularSplitModule,
     ],
     entryComponents: [
         SlidesList

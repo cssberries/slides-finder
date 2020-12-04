@@ -1,10 +1,11 @@
-<div class="major absolute-stretch bg--canvas">
-	<div
-		class="flex flex--0 flex-direction--column border--r bg--aside transition--xs"
-		[ngClass]="{
-			'width--0 opacity--0 ': sidebarClosed || isFullscreen,
-			'width--xl opacity--1 ': !sidebarClosed && !isFullscreen
-		}"
+<as-split direction="horizontal" unit="pixel" gutterSize="8" (dragEnd)="onDragEnd($event)" class="major absolute-stretch bg--canvas">
+	<as-split-area
+		*ngIf="!isFullscreen"
+		[order]="0"
+		[minSize]="100"
+		[size]="finderWidth"
+		[maxSize]="500"
+		class="flex flex--0 flex-direction--column bg--aside"
 	>
 		<div class="tool-bar border--b">
 			<div class="input-block input-block--integrated-controls flex--1">
@@ -192,10 +193,10 @@
 				</div>
 			</ng-template>
 		</tree-root>
-	</div>
-	<div class="rows">
+	</as-split-area>
+	<as-split-area size="*" class="rows" [order]="1">
 		<div
-			class="tool-bar transition--xs"
+			class="tool-bar"
 			[ngClass]="{
 				'height--0 opacity--0': slideToolbarClosed || isFullscreen,
 				'height--lg opacity--1 border--b ': !slideToolbarClosed && !isFullscreen
@@ -203,12 +204,14 @@
 		>
 			<div class="flex align-items--center" *ngIf="!activeNodeIsFolder && !isProduction">
 				<div class="btn btn--silent" (click)="editHTML()">
-					<div class="icon-edit"></div>
-					<div class="margin-l--xs">Edit HTML</div>
-				</div>
-				<div class="btn btn--silent" (click)="editTS()">
-					<div class="icon-edit"></div>
-					<div class="margin-l--xs">Edit TS</div>
+					<div class="font--black">HTML</div>
+					<!-- <div class="icon-edit"></div>
+						<div class="margin-l--xs">Edit HTML</div> -->
+					</div>
+					<div class="btn btn--silent" (click)="editTS()">
+						<div class="font--black">TS</div>
+					<!-- <div class="icon-edit"></div>
+					<div class="margin-l--xs">Edit TS</div> -->
 				</div>
 				<div class="btn btn--silent" (click)="duplicate()">
 					<div class="icon-copy"></div>
@@ -229,12 +232,14 @@
 			</div>
 			<div class="buttons-group buttons-group--xs buttons-group--primary align-self--center margin--l--auto">
 				<div class="btn" [ngClass]="{ active: theme === 'mf--dark' }" (click)="setTheme('mf--dark')">Dark</div>
-				<div class="btn" [ngClass]="{ active: theme === 'mf--light' }" (click)="setTheme('mf--light')">Light</div>
+				<div class="btn" [ngClass]="{ active: theme === 'mf--light' }" (click)="setTheme('mf--light')">
+					Light
+				</div>
 				<div class="btn" [ngClass]="{ active: theme === 'sketch' }" (click)="setTheme('sketch')">Sketch</div>
 			</div>
 		</div>
 		<div
-			class="rows relative transition--xs"
+			class="rows relative"
 			[ngClass]="{
 				'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl':
 					!activeNodeIsFolder && !isFullscreen,
@@ -245,5 +250,5 @@
 			<iframe id="slideRender" class="stretch" [src]="slideUrl" frameborder="0"></iframe>
 			<router-outlet></router-outlet>
 		</div>
-	</div>
-</div>
+	</as-split-area>
+</as-split>

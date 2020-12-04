@@ -23,7 +23,27 @@
 		}
 	}
 }
-
+.as-split-gutter.as-split-gutter.as-split-gutter.as-split-gutter {
+	.bg--content;
+	.border--v;
+	.as-split-gutter-icon.as-split-gutter-icon.as-split-gutter-icon {
+		all: unset;
+		.flex;
+		.align-items--center;
+		&:after{
+			content: "";
+			.block;
+			height: 20px;
+			width: 3px;
+			.border--v;
+			.border--strong;
+		}
+	}
+}
+.as-dragging as-split-area{
+	// .bg--error;
+	pointer-events: none;
+}
 .input-block--sm {
 	.input-block__input {
 		height: 24px;

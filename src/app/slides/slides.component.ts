@@ -26,14 +26,15 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     public nodes: any;
     public sidebarClosed;
     public slideToolbarClosed;
-    public isFullscreen;
+    public isFullscreen = false;
     public activeNode;
     public treeFilterValue;
     slideUrl: any;
-
+    
     isProduction = environment.production;
-
+    
     public activeRoute: string = this.router.url || this.storage.get('activeRoute') || 'slides';
+    public finderWidth = this.storage.get('finderWidth') || 300;
 
     treeOptions: ITreeOptions = {
         isExpandedField: 'expanded',
@@ -119,29 +120,27 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         this.treeFilterValue = null;
     }
 
-
     filterFn(value: string, treeModel: TreeModel) {
         treeModel.filterNodes((node: TreeNode) => this.fuzzySearch(value, node.data.name));
     }
-
 
     fuzzySearch(needle: string, haystack: string) {
         const haystackLC = haystack.toLowerCase();
         const needleLC = needle.toLowerCase();
 
-        const hlen = haystack.length;
-        const nlen = needleLC.length;
+        const haystackLength = haystack.length;
+        const needleLCLength = needleLC.length;
 
-        if (nlen > hlen) {
+        if (needleLCLength > haystackLength) {
             return false;
         }
-        if (nlen === hlen) {
+        if (needleLCLength === haystackLength) {
             return needleLC === haystackLC;
         }
-        outer: for (let i = 0, j = 0; i < nlen; i++) {
+        outer: for (let i = 0, j = 0; i < needleLCLength; i++) {
             const nch = needleLC.charCodeAt(i);
 
-            while (j < hlen) {
+            while (j < haystackLength) {
                 if (haystackLC.charCodeAt(j++) === nch) {
                     continue outer;
                 }
@@ -302,6 +301,11 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
         document.firstElementChild.setAttribute('class', themeName);
         this.storage.set('theme', this.theme);
         this.iframeSvc.sendMessage({ type: 'theme', theme: themeName })
+
+    }
+    onDragEnd(event) {
+        console.log(event.sizes[0]);
+        this.storage.set('finderWidth', event.sizes[0]);
 
     }
 
