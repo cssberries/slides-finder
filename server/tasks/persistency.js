@@ -41,7 +41,7 @@ module.exports = {
                 console.log( `proposedFolderState exists: ${proposedFolderState}` );
                 this.folderNameMatches = this.folderNameMatches + 1;
             } else {
-                if ( tree[i].children.length > 0 ) {
+                if ( tree[i].children ) {
                     this.traverseFolderStateExists( tree[i].children, node, proposedFolderState );
                 }
             }
@@ -49,9 +49,6 @@ module.exports = {
         console.log( `this.folderNameMatches: ${this.folderNameMatches}` );
     },
 
-    // tree: function () {
-    //     return JSON.parse( fs.readFileSync( 'persistency/tree.json', 'utf8' ) );
-    // },
     rename: function ( node ) {
         let nodes = this.traverseFind( JSON.parse( fs.readFileSync( 'persistency/tree.json', 'utf8' ) ), node, 'rename' );
         fs.writeFileSync( 'persistency/tree.json', JSON.stringify( nodes, null, 4 ) );

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { TREE_ACTIONS, KEYS, ITreeState, ITreeOptions, TreeModel, TreeNode } from 'angular-tree-component';
 import { Router, Event, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
-import { SlidesList } from '../../../../../slides-list.module';
 import { StorageService } from '../storage.service';
 import { SlidesService } from './slides.service';
 import { Subscription } from 'rxjs';
