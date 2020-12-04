@@ -5,10 +5,8 @@ const updateTree = importFresh( './update-tree' );
 
 module.exports = {
     
-    duplicate: function (node, options) {
-        console.log(node);
+    duplicate: function ( node, options ) {
         let originalPath = `render/mockups/${node.name}`;
-        console.log(`originalPath: ${originalPath}`);
         let parentPath = originalPath.substr(0, originalPath.lastIndexOf('/'));
 
         let parentStateParts = node.state.split('/');
@@ -19,7 +17,9 @@ module.exports = {
         fs.ensureDirSync(`${parentPath}/${compName}`);
         //
         let componentContent = fs.readFileSync(`${originalPath}/component.ts`, "utf8");
-        componentContent = componentContent.replace(/(?<=\bexport class\s)(\w+)/g, compName);
+        let selector = `selector: '${compName}',`;
+        componentContent = componentContent.replace( /(selector.*?\,)/g, selector );
+        componentContent = componentContent.replace( /(?<=\bexport class\s)(\w+)/g, compName );
         let componentFile = `${parentPath}/${compName}/component.ts`;
         fs.writeFileSync(componentFile, componentContent);
         //
