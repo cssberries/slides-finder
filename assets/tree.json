@@ -12,6 +12,71 @@
                 "state": "mockups/CMEBOCIEEO",
                 "index": "\u0004",
                 "component": "CMEBOCIEEO"
+            },
+            {
+                "slidePath": "../render/mockups/AAQPKTJLMZ",
+                "name": "AAQPKTJLMZ",
+                "id": "AAQPKTJLMZ",
+                "state": "mockups/AAQPKTJLMZ",
+                "index": "\u0004",
+                "component": "AAQPKTJLMZ"
+            },
+            {
+                "slidePath": "../render/mockups/WTRTXCEBTD",
+                "name": "WTRTXCEBTD",
+                "id": "WTRTXCEBTD",
+                "state": "mockups/WTRTXCEBTD",
+                "index": "\u0004",
+                "component": "WTRTXCEBTD"
+            },
+            {
+                "slidePath": "../render/mockups/CSPVSRVFFA",
+                "name": "CSPVSRVFFA",
+                "id": "CSPVSRVFFA",
+                "state": "mockups/CSPVSRVFFA",
+                "index": "\u0004",
+                "component": "CSPVSRVFFA"
+            },
+            {
+                "slidePath": "../render/mockups/JKHGNQQNFB",
+                "name": "JKHGNQQNFB",
+                "id": "JKHGNQQNFB",
+                "state": "mockups/JKHGNQQNFB",
+                "index": "\u0004",
+                "component": "JKHGNQQNFB",
+                "children": []
+            },
+            {
+                "slidePath": "../render/mockups/ZEKIXAMPRV",
+                "name": "ZEKIXAMPRV",
+                "id": "ZEKIXAMPRV",
+                "state": "mockups/ZEKIXAMPRV",
+                "index": "\u0004",
+                "component": "ZEKIXAMPRV"
+            },
+            {
+                "slidePath": "../render/mockups/IUFGIYBLOO",
+                "name": "IUFGIYBLOO",
+                "id": "IUFGIYBLOO",
+                "state": "mockups/IUFGIYBLOO",
+                "index": "\u0004",
+                "component": "IUFGIYBLOO"
+            },
+            {
+                "slidePath": "../render/mockups/KCDCPBREEZ",
+                "name": "KCDCPBREEZ",
+                "id": "KCDCPBREEZ",
+                "state": "mockups/KCDCPBREEZ",
+                "index": "\u0004",
+                "component": "KCDCPBREEZ"
+            },
+            {
+                "slidePath": "../render/mockups/CATDKXSVBD",
+                "name": "CATDKXSVBD",
+                "id": "CATDKXSVBD",
+                "state": "mockups/CATDKXSVBD",
+                "index": "\u0004",
+                "component": "CATDKXSVBD"
             }
         ]
     }
