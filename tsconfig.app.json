@@ -9,8 +9,8 @@
     }
   },
   "include": [
-    "../../../render/node_modules/slides-render-angular/src/app/slides/slides-listing/slides-listing.component.ts",
-    "../../../render/node_modules/slides-render-angular/src/app/slides/slides-render/slides-render.component.ts",
+    "../../../render/node_modules/**/src/app/slides/slides-listing/slides-listing.component.ts",
+    "../../../render/node_modules/**/src/app/slides/slides-render/slides-render.component.ts",
     "src/main.ts",
     "src/polyfills.ts",
     "src/**/*.ts"
