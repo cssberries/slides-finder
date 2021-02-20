@@ -357,7 +357,7 @@ export class SlidesComponent implements OnInit, OnDestroy, AfterViewInit {
     ngAfterViewInit() {
         setTimeout(() => {
             const node = this.findNodeByState(this.tree, this.storage.get('activeRoute'));
-            if (node) {
+            if (node && !this.isFullscreen) {
                 const someNode = this.slidesTree.treeModel.getNodeById(node.id);
                 this.expandParent(someNode);
             }

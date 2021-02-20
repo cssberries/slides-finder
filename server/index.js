@@ -16,7 +16,7 @@ module.exports = {
 
         const app = express();
         app.use( bodyParser.urlencoded( { extended: true } ) );
-        app.use( bodyParser.json() );
+        app.use( bodyParser.json( { limit: '50mb' } ) );
 
         var editor = openInEditor.configure( {
             editor: 'code' // Important: VS Code should be installed using System Installer.
@@ -33,10 +33,6 @@ module.exports = {
             return await git.status();
         }
 
-        // app.get( '/api/data/slides', ( request, response ) => {
-        //     response.send( persistency.tree() );
-        // } );
-
         app.post( '/api/slides/git-status', ( request, response ) => {
             console.log( gitStatus() );
         } );
@@ -52,7 +48,7 @@ module.exports = {
         } );
 
         app.post( '/api/slides/deleteFolder', ( request, response ) => {
-            persistency.deleteFolder( request.body.body.path );
+            persistency.deleteFolder( request.body.body.path, options );
         } );
 
         app.post( '/api/slides/editTS', ( request, response ) => {

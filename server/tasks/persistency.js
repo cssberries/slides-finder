@@ -102,17 +102,39 @@ module.exports = {
         return persistency;
     },
 
-    deleteFolder: function ( node ) {
+    getFolderComponentsList: function ( folder ) {
+        let list = [];
+        function traverse( node ) {
+            for ( let i = 0; i < node.children.length; i++ ) {
+                list.push( `./render/mockups/${node.children[i].id}` )
+                if ( node.children[i].children ) {
+                    traverse( node.children[i] );
+                }
+            }
+        }
+        traverse( folder );
+        return list;
+    },
+
+    deleteFolder: function ( node, opt ) {
+        console.log( this.getFolderComponentsList( node ) );
+        this.getFolderComponentsList( node ).forEach( path => {
+            console.log( `Removing ${path}` );
+            fs.removeSync( path );
+        } );
+
         let nodes = this.traverseFind( JSON.parse( fs.readFileSync( 'persistency/tree.json', 'utf8' ) ), node, 'deleteFolder' );
         fs.writeFileSync( 'persistency/tree.json', JSON.stringify( nodes, null, 4 ) );
+
+        updateTree.update( opt );
     },
 
     deleteSlide: function ( node, opt ) {
         let nodes = this.traverseDelete( JSON.parse( fs.readFileSync( 'persistency/tree.json', 'utf8' ) ), node );
         fs.writeFileSync( 'persistency/tree.json', JSON.stringify( nodes, null, 4 ) );
         let path = `./render/mockups/${node.id}`;
-        console.log( path );
         fs.removeSync( path );
+        console.log( path );
         updateTree.update( opt );
     },
 

@@ -1,13 +1,13 @@
-<as-split direction="horizontal" unit="pixel" gutterSize="8" (dragEnd)="onDragEnd($event)" class="major absolute-stretch bg--canvas">
+<as-split direction="horizontal" unit="pixel" gutterSize="8" (dragEnd)="onDragEnd($event)" class="major absolute-stretch bg--aside">
 	<as-split-area
 		*ngIf="!isFullscreen"
 		[order]="0"
 		[minSize]="100"
 		[size]="finderWidth"
-		[maxSize]="500"
+		[maxSize]="1000"
 		class="flex flex--0 flex-direction--column bg--aside"
 	>
-		<div class="tool-bar border--b">
+		<div class="tool-bar *border--b">
 			<div class="input-block input-block--integrated-controls flex--1">
 				<input
 					class="input-block__input"
@@ -199,7 +199,7 @@
 			class="tool-bar"
 			[ngClass]="{
 				'height--0 opacity--0': slideToolbarClosed || isFullscreen,
-				'height--lg opacity--1 border--b ': !slideToolbarClosed && !isFullscreen
+				'height--lg opacity--1 *border--b': !slideToolbarClosed && !isFullscreen
 			}"
 		>
 			<div class="flex align-items--center" *ngIf="!activeNodeIsFolder && !isProduction">
@@ -241,7 +241,7 @@
 		<div
 			class="rows relative"
 			[ngClass]="{
-				'bg--content radius--md overflow--hidden shadow--md shadow--strong margin--xl':
+				'bg--content radius--sm overflow--hidden shadow--md margin-r--lg margin-b--lg margin-l--md':
 					!activeNodeIsFolder && !isFullscreen,
 				'': activeNodeIsFolder || isFullscreen,
 				'bg--content': !activeNodeIsFolder

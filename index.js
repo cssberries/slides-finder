@@ -37,8 +37,6 @@ module.exports = {
     },
 
     run: function ( options ) {
-        // options.slidesTreePath = './mockups';
-        // listAll.run( options );
         this.setOptions( options );
         module.exports.ensureRoutesList();
         module.exports.ensureProxyConfigs( options );
